@@ -1,0 +1,131 @@
+[
+  {
+    "question": "1) So với các nguyên tố cùng chu kì, nguyên tử kim loại có đặc điểm cấu tạo nào sau đây?",
+    "options": [
+      "Bán kính nguyên tử lớn, độ âm điện nhỏ.",
+      "Bán kính nguyên tử nhỏ, độ âm điện lớn.",
+      "Điện tích hạt nhân lớn, bán kính nguyên tử nhỏ.",
+      "Bán kính nguyên tử nhỏ, dễ nhận electron."
+    ],
+    "answer": 0,
+    "explanation": "Kim loại có điện tích hạt nhân nhỏ, bán kính nguyên tử lớn so với các nguyên tố cùng chu kì, kim loại dễ nhường electron hoá trị và có độ âm điện nhỏ."
+  },
+  {
+    "question": "2) Ở nhiệt độ phòng, kim loại nào sau đây KHÔNG tồn tại ở trạng thái rắn?",
+    "options": ["Tungsten (W)", "Sắt (Fe)", "Thuỷ ngân (Hg)", "Đồng (Cu)"],
+    "answer": 2,
+    "explanation": "Ở nhiệt độ phòng, các đơn chất kim loại ở thể rắn và cấu tạo tinh thể, ngoại trừ thuỷ ngân (Hg) ở thể lỏng."
+  },
+  {
+    "question": "3) Liên kết kim loại được hình thành do?",
+    "options": [
+      "Sự dùng chung các cặp electron giữa các nguyên tử kim loại",
+      "Lực hút tĩnh điện giữa các ion dương kim loại và electron tự do trong mạng tinh thể",
+      "Lực hút tĩnh điện giữa ion dương và ion âm.",
+      "Lực tương tác yếu giữa các phân tử"
+    ],
+    "answer": 1,
+    "explanation": "Liên kết kim loại được hình thành do lực hút tĩnh điện giữa các ion dương kim loại và electron tự do trong mạng tinh thể."
+  },
+  {
+    "question": "4) Trong mạng tinh thể kim loại, các hạt nằm ở các nút mạng là:",
+    "options": [
+      "Electron tự do",
+      "Nguyên tử phi kim",
+      "Ion âm và nguyên tử",
+      "Ion dương"
+    ],
+    "answer": 3,
+    "explanation": "Các ion dương nằm ở các nút mạng tinh thể và các electron hoá trị chuyển động tự do trong mạng tinh thể."
+  },
+  {
+    "question": "5) Dãy kim loại nào sau đây được sắp xếp theo chiều giảm dần khả năng dẫn điện?",
+    "options": ["Ag > Cu > Au", "Cu > Ag > Au", "Au > Ag > Cu", "Ag > Au > Cu"],
+    "answer": 0,
+    "explanation": "Khả năng dẫn điện của kim loại giảm dần theo thứ tự: Ag > Cu > Au > ...."
+  },
+  {
+    "question": "6) Kim loại nào sau đây có nhiệt độ nóng chảy cao nhất?",
+    "options": ["Chromium", "Thuỷ ngân", "Tungsten", "Osmium"],
+    "answer": 2,
+    "explanation": "Tungsten có nhiệt độ nóng chảy rất cao (3440°C). Thủy ngân thấp nhất (-39°C), Osmium là kim loại nặng nhất, Chromium cứng nhất."
+  },
+  {
+    "question": "7) Những kim loại nào sau đây bị thụ động hoá trong dung dịch HNO3 đặc, nguội và H2SO4 đặc, nguội?",
+    "options": ["Fe, Cu, Ag", "Al, Fe, Cr", "Zn, Pb, Au", "Na, K, Ca"],
+    "answer": 1,
+    "explanation": "HNO3 đặc, nguội và H2SO4 đặc, nguội làm thụ động hoá Al, Fe, Cr."
+  },
+  {
+    "question": "8) Ở điều kiện thường, kim loại có các tính chất vật lí chung là:",
+    "options": [
+      "Tính dẻo, tính dẫn điện, tính dẫn nhiệt và tính cứng.",
+      "Tính dẻo, tính dẫn điện, khối lượng riêng lớn và ánh kim.",
+      "Tính dẻo, tính dẫn điện, tính dẫn nhiệt và ánh kim.",
+      "Tính cứng, nhiệt độ nóng chảy cao, tính dẫn nhiệt và ánh kim."
+    ],
+    "answer": 2,
+    "explanation": "Ở điều kiện thường, kim loại có các tính chất vật lí chung: tính dẻo, tính dẫn điện, tính dẫn nhiệt và ánh kim."
+  },
+  {
+    "question": "9) Trong công nghiệp, nhôm (Al) được sản xuất từ quặng bauxite bằng phương pháp nào sau đây?",
+    "options": [
+      "Điện phân dung dịch muối chloride.",
+      "Điện phân oxide nóng chảy.",
+      "Nhiệt luyện bằng CO hoặc H₂",
+      "Thủy luyện."
+    ],
+    "answer": 1,
+    "explanation": "Nhôm được sản xuất bằng phương pháp điện phân oxide nóng chảy (Al₂O₃ nóng chảy hòa tan trong Cryolite)."
+  },
+  {
+    "question": "10) Trong quá trình điện phân Al2O3 nóng chảy, Cryolite (Na₃AlF₆) KHÔNG có tác dụng nào sau đây?",
+    "options": [
+      "Giảm nhiệt độ nóng chảy của hỗn hợp.",
+      "Tăng độ dẫn điện.",
+      "Tạo lớp màng bảo vệ nhôm lỏng khỏi bị oxy hóa.",
+      "Đóng vai trò là chất khử để tạo ra Al."
+    ],
+    "answer": 3,
+    "explanation": "Cryolite có tác dụng giảm nhiệt độ nóng chảy, tăng độ dẫn điện và tạo lớp màng bảo vệ. Nó không đóng vai trò làm chất khử."
+  },
+  {
+    "question": "11) Phương pháp nhiệt luyện (dùng C, CO, H₂, Al làm chất khử) thường được áp dụng để điều chế các kim loại:",
+    "options": [
+      "Hoạt động hóa học mạnh (Na, K, Ca, Ba).",
+      "Đứng sau Al trong dãy hoạt động hóa học (Zn, Fe, Sn, Pb, Cu).",
+      "Rất yếu, tồn tại ở dạng tự do (Au, Pt).",
+      "Bất kỳ kim loại nào."
+    ],
+    "answer": 1,
+    "explanation": "Phương pháp nhiệt luyện dùng để điều chế các kim loại hoạt động trung bình và yếu (đứng sau Al trong dãy hoạt động: Zn, Fe, Sn, Pb, Cu)."
+  },
+  {
+    "question": "12) Bản chất của quá trình ăn mòn kim loại là:",
+    "options": [
+      "Kim loại bị khử thành ion kim loại.",
+      "Kim loại bị oxi hóa thành ion kim loại.",
+      "Ion kim loại bị khử thành kim loại.",
+      "Ion kim loại bị oxi hóa thành kim loại."
+    ],
+    "answer": 1,
+    "explanation": "Bản chất của ăn mòn kim loại là kim loại bị oxi hóa thành ion kim loại."
+  },
+  {
+    "question": "13) Việc tái chế Đồng (Cu) giúp tiết kiệm khoảng bao nhiêu phần trăm năng lượng so với khai thác từ quặng chalcopyrite?",
+    "options": ["60 – 74%", "85%", "100%", "50%"],
+    "answer": 1,
+    "explanation": "Đồng tái chế giúp tiết kiệm tới 85% năng lượng so với khai thác từ quặng chalcopyrite."
+  },
+  {
+    "question": "14) Thành phần phần trăm khối lượng của carbon trong gang và thép lần lượt là:",
+    "options": [
+      "Gang (2–5%), Thép (< 2%).",
+      "Gang (< 2%), Thép (2–5%).",
+      "Gang (> 5%), Thép (< 2%).",
+      "Gang (< 2%), Thép (> 5%)."
+    ],
+    "answer": 0,
+    "explanation": "Gang là hợp kim của Fe và C, trong đó C chiếm 2–5%. Thép là hợp kim của Fe và C, trong đó C < 2%."
+  }
+]

@@ -1,0 +1,411 @@
+/* ===== CHAT AI – nút nổi + khung trò chuyện ===== */
+
+.ai-chat {
+  --ai-navy: #2c3e50;
+  --ai-green: #35765b;
+  --ai-green-dark: #285a46;
+  --ai-paper: #fffef6;
+  --ai-bg: #f6f5ec;
+  --ai-line: #e4e1d0;
+  --ai-text: #2b2b2b;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  color: var(--ai-text);
+}
+
+.ai-chat *,
+.ai-chat *::before,
+.ai-chat *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Nút nổi (góc phải) ---------- */
+.ai-chat__fab {
+  position: fixed;
+  right: 18px;
+  bottom: 70px;
+  z-index: 9999;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--ai-green);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+}
+
+.ai-chat__fab:hover {
+  background: var(--ai-green-dark);
+}
+
+.ai-chat__fab:active {
+  transform: scale(0.94);
+}
+
+.ai-chat__fab svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ai-chat__fab .icon-close {
+  display: none;
+}
+
+.ai-chat.is-open .ai-chat__fab .icon-chat {
+  display: none;
+}
+
+.ai-chat.is-open .ai-chat__fab .icon-close {
+  display: block;
+}
+
+.ai-chat__fab:focus-visible,
+.ai-chat button:focus-visible,
+.ai-chat textarea:focus-visible {
+  outline: 3px solid #f5b942;
+  outline-offset: 2px;
+}
+
+/* ---------- Khung chat ---------- */
+.ai-chat__panel {
+  position: fixed;
+  right: 18px;
+  bottom: 134px;
+  z-index: 9999;
+  width: 370px;
+  height: min(540px, calc(100vh - 160px));
+  display: flex;
+  flex-direction: column;
+  background: var(--ai-paper);
+  border: 1px solid var(--ai-line);
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+
+  /* Ẩn mặc định */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.98);
+  transform-origin: bottom right;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0s linear 0.2s;
+}
+
+.ai-chat.is-open .ai-chat__panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0s;
+}
+
+/* Header */
+.ai-chat__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--ai-navy);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.ai-chat__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.ai-chat__title strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.ai-chat__title span {
+  display: block;
+  font-size: 12px;
+  opacity: 0.75;
+  line-height: 1.3;
+}
+
+.ai-chat__header button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.8;
+  transition:
+    background-color 0.15s,
+    opacity 0.15s;
+}
+
+.ai-chat__header button:hover {
+  background: rgba(255, 255, 255, 0.14);
+  opacity: 1;
+}
+
+.ai-chat__header button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Danh sách tin nhắn */
+.ai-chat__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  background: var(--ai-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+.ai-msg {
+  max-width: 88%;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.ai-msg p {
+  margin: 0 0 6px;
+}
+
+.ai-msg p:last-child,
+.ai-msg ul:last-child {
+  margin-bottom: 0;
+}
+
+.ai-msg ul {
+  margin: 0 0 6px;
+  padding-left: 18px;
+}
+
+.ai-msg code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.07);
+  font-family: Consolas, monospace;
+  font-size: 0.92em;
+}
+
+.ai-msg--bot {
+  align-self: flex-start;
+  background: #fff;
+  border: 1px solid var(--ai-line);
+  border-bottom-left-radius: 4px;
+}
+
+.ai-msg--user {
+  align-self: flex-end;
+  background: var(--ai-green);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+  white-space: pre-wrap;
+}
+
+.ai-msg--error {
+  align-self: flex-start;
+  background: #fdecea;
+  border: 1px solid #f5c6cb;
+  color: #7a1f27;
+  border-bottom-left-radius: 4px;
+}
+
+.ai-msg--notice {
+  align-self: flex-start;
+  background: #fff6dc;
+  border: 1px solid #f0d98c;
+  color: #6b4e00;
+  border-bottom-left-radius: 4px;
+}
+
+/* Gợi ý câu hỏi */
+.ai-chat__suggest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.ai-chat__suggest button {
+  max-width: 100%;
+  padding: 7px 11px;
+  border: 1px solid var(--ai-green);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--ai-green-dark);
+  font-size: 13px;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.ai-chat__suggest button:hover {
+  background: #e9f3ee;
+}
+
+/* Đang gõ */
+.ai-typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.ai-typing i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #9aa5a0;
+  animation: ai-bounce 1s infinite ease-in-out;
+}
+
+.ai-typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.ai-typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes ai-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* Ô nhập */
+.ai-chat__form {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid var(--ai-line);
+  background: var(--ai-paper);
+  flex-shrink: 0;
+}
+
+.ai-chat__form textarea {
+  flex: 1;
+  min-height: 40px;
+  max-height: 110px;
+  padding: 9px 11px;
+  border: 1px solid #cfccb8;
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  resize: none;
+  color: var(--ai-text);
+}
+
+.ai-chat__form textarea:focus {
+  border-color: var(--ai-green);
+}
+
+.ai-chat__send {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: var(--ai-navy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.ai-chat__send:hover:not(:disabled) {
+  background: #34495e;
+}
+
+.ai-chat__send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ai-chat__send svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Điện thoại ---------- */
+@media (max-width: 600px) {
+  .ai-chat__fab {
+    right: 12px;
+    bottom: 64px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .ai-chat__panel {
+    left: 8px;
+    right: 8px;
+    bottom: 122px;
+    width: auto;
+    height: calc(100vh - 140px);
+    height: calc(100dvh - 140px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-chat__panel,
+  .ai-chat__fab,
+  .ai-chat__messages {
+    transition: none;
+    scroll-behavior: auto;
+  }
+
+  .ai-typing i {
+    animation: none;
+  }
+}
