@@ -1,6 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
   const bookElement = document.getElementById("my-book");
 
+  // Đo chiều cao thanh chuyển trang (nằm lơ lửng phía dưới) rồi báo cho CSS
+  // để khung sách chừa đúng chỗ, không bị thanh nút đè lên.
+  const controlsEl = document.querySelector(".controls");
+  function updateDock() {
+    const rect = controlsEl.getBoundingClientRect();
+    const dock = Math.ceil(window.innerHeight - rect.top) + 6;
+    document.documentElement.style.setProperty("--dock-h", dock + "px");
+  }
+  updateDock();
+
   const pageFlip = new St.PageFlip(bookElement, {
     width: 400,
     height: 600,
@@ -113,13 +123,27 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
+      updateDock();
       pageFlip.update();
     }, 250);
   });
 
+  // Thanh nút đổi kích thước (ví dụ xuống dòng trên màn hình hẹp)
+  if (window.ResizeObserver) {
+    let dockTimer;
+    new ResizeObserver(function () {
+      updateDock();
+      clearTimeout(dockTimer);
+      dockTimer = setTimeout(function () {
+        pageFlip.update();
+      }, 150);
+    }).observe(controlsEl);
+  }
+
   // Mobile orientation
   window.addEventListener("orientationchange", function () {
     setTimeout(function () {
+      updateDock();
       pageFlip.update();
     }, 500);
   });

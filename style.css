@@ -448,31 +448,80 @@ a.toc-link {
 }
 
 /* =====================================================================
-   SỬA LỖI THANH NÚT ĐIỀU HƯỚNG BỊ THANH HOME CHE / BIẾN MẤT
-   (đặt cuối file để ghi đè các khai báo height: calc(100vh - ...) ở trên)
+   THANH CHUYỂN TRANG LƠ LỬNG TRÊN THANH HOME (đặt cuối file để ghi đè)
 
-   - 100vh trên điện thoại lớn hơn vùng nhìn thấy thật -> dùng 100dvh.
-   - Khung sách dùng flex-basis: 0 để có chiều cao XÁC ĐỊNH (thư viện
-     page-flip cần đo chiều cao này để co sách cho vừa khung).
-   - Thanh nút luôn nằm dưới cùng vùng nhìn thấy, chừa chỗ cho thanh home.
+   - .controls: position fixed -> luôn nằm trong vùng nhìn thấy, phía trên
+     thanh home / thanh địa chỉ, không bao giờ bị đẩy ra ngoài màn hình.
+   - .book-container: cũng position fixed, chừa phía dưới đúng bằng chiều
+     cao thanh nút (biến --dock-h, do script.js đo thật và cập nhật).
    ===================================================================== */
 html,
 body {
-  height: 100vh; /* dự phòng cho trình duyệt cũ */
-  height: 100dvh;
+  height: 100%;
+  overflow: hidden;
 }
 
 .book-container {
-  flex: 1 1 0;
-  height: 0;
-  min-height: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: var(--dock-h, 72px);
+  width: auto;
+  max-width: none;
+  height: auto;
   max-height: none;
-  width: 100%;
+  margin: 0;
 }
 
 .controls {
-  flex: 0 0 auto;
+  position: fixed;
+  left: 50%;
+  bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 50;
+  width: max-content;
+  max-width: calc(100vw - 16px);
   height: auto;
-  min-height: 50px;
-  padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
+  min-height: 0;
+  padding: 6px 10px;
+  gap: 6px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #e2e5ea;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.controls button {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+#btn-prev,
+#btn-next {
+  min-width: 0;
+}
+
+.page-indicator {
+  font-size: 13px;
+}
+
+#page-input {
+  width: 64px;
+  padding: 7px 6px;
+  border: 1px solid #c9ced6;
+  border-radius: 5px;
+  font-size: 16px; /* >=16px để iPhone không tự phóng to khi bấm vào */
+  text-align: center;
+}
+
+/* Nút chat AI nổi phía trên thanh chuyển trang (không đè lên nhau) */
+.ai-chat .ai-chat__fab {
+  bottom: calc(var(--dock-h, 72px) + 8px);
+}
+
+.ai-chat .ai-chat__panel {
+  bottom: calc(var(--dock-h, 72px) + 68px);
+  height: min(540px, calc(100dvh - var(--dock-h, 72px) - 90px));
 }
