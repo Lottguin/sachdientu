@@ -448,12 +448,13 @@ a.toc-link {
 }
 
 /* =====================================================================
-   SỬA LỖI THANH NÚT ĐIỀU HƯỚNG BỊ THANH HOME / THANH ĐỊA CHỈ CHE MẤT
+   SỬA LỖI THANH NÚT ĐIỀU HƯỚNG BỊ THANH HOME CHE / BIẾN MẤT
    (đặt cuối file để ghi đè các khai báo height: calc(100vh - ...) ở trên)
 
-   Nguyên nhân: trên điện thoại, 100vh = chiều cao khi thanh địa chỉ đã
-   thu gọn, nên lớn hơn vùng nhìn thấy thật -> thanh nút bị đẩy xuống
-   dưới đáy màn hình. 100dvh = chiều cao vùng nhìn thấy thực tế.
+   - 100vh trên điện thoại lớn hơn vùng nhìn thấy thật -> dùng 100dvh.
+   - Khung sách dùng flex-basis: 0 để có chiều cao XÁC ĐỊNH (thư viện
+     page-flip cần đo chiều cao này để co sách cho vừa khung).
+   - Thanh nút luôn nằm dưới cùng vùng nhìn thấy, chừa chỗ cho thanh home.
    ===================================================================== */
 html,
 body {
@@ -461,16 +462,17 @@ body {
   height: 100dvh;
 }
 
-/* Sách chiếm phần còn lại; thanh nút luôn nằm gọn ở đáy vùng nhìn thấy */
 .book-container {
-  flex: 1 1 auto;
+  flex: 1 1 0;
+  height: 0;
   min-height: 0;
-  height: auto;
   max-height: none;
+  width: 100%;
 }
 
 .controls {
-  flex-shrink: 0;
-  /* chừa thêm khoảng trống phía dưới cho thanh home / thanh cử chỉ */
-  padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+  flex: 0 0 auto;
+  height: auto;
+  min-height: 50px;
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
 }
