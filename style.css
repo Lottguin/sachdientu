@@ -11,7 +11,6 @@ body {
   background-color: #f0f2f5;
   width: 100%;
   height: 100%;
-  height: 100dvh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -25,9 +24,9 @@ body {
 
 .book-container {
   width: 100%;
-  height: calc(100vh - 60px - env(safe-area-inset-bottom, 0px));
+  height: calc(100vh - 60px);
   max-width: 100vw;
-  max-height: calc(100vh - 60px - env(safe-area-inset-bottom, 0px));
+  max-height: calc(100vh - 60px);
   margin: 0;
   display: flex;
   justify-content: center;
@@ -180,21 +179,15 @@ a:active {
 
 /* NÚT ĐIỀU HƯỚNG */
 .controls {
-  width: fit-content;
-  max-width: calc(100vw - 24px);
+  width: 100%;
+  min-height: 55px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
+  max-width: 100vw;
   flex-wrap: wrap;
-
-  /* Diện mạo "nổi": tách khỏi khung sách và khỏi mép màn hình */
-  margin: 8px auto;
-  padding: 8px 16px;
-  background: #ffffff;
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 button {
@@ -251,8 +244,8 @@ a.toc-link {
   }
   .book-container {
     width: 100%;
-    height: calc(100vh - 60px - env(safe-area-inset-bottom, 0px));
-    max-height: calc(100vh - 60px - env(safe-area-inset-bottom, 0px));
+    height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
     margin: 0;
   }
   .my-page {
@@ -276,7 +269,8 @@ a.toc-link {
   }
 
   .controls {
-    padding: 6px 12px;
+    height: 50px;
+
     gap: 6.5px;
   }
 
@@ -303,8 +297,8 @@ a.toc-link {
 @media (max-width: 380px) {
   .book-container {
     width: 100%;
-    height: calc(100vh - 55px - env(safe-area-inset-bottom, 0px));
-    max-height: calc(100vh - 55px - env(safe-area-inset-bottom, 0px));
+    height: calc(100vh - 55px);
+    max-height: calc(100vh - 55px);
   }
 
   .my-page {
@@ -348,8 +342,8 @@ a.toc-link {
 @media (min-width: 601px) and (max-width: 1000px) {
   .book-container {
     width: 100%;
-    height: calc(100vh - 65px - env(safe-area-inset-bottom, 0px));
-    max-height: calc(100vh - 65px - env(safe-area-inset-bottom, 0px));
+    height: calc(100vh - 65px);
+    max-height: calc(100vh - 65px);
   }
 
   .my-page {
@@ -361,9 +355,9 @@ a.toc-link {
 @media (min-width: 1001px) {
   .book-container {
     width: 100%;
-    height: calc(100vh - 65px - env(safe-area-inset-bottom, 0px));
+    height: calc(100vh - 65px);
     max-width: 100vw;
-    max-height: calc(100vh - 65px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100vh - 65px);
   }
   .my-page {
     padding: 35px;
@@ -420,9 +414,9 @@ a.toc-link {
 
 @media (orientation: landscape) {
   .book-container {
-    height: calc(100vh - 55px - env(safe-area-inset-bottom, 0px));
+    height: calc(100vh - 55px);
 
-    max-height: calc(100vh - 55px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100vh - 55px);
   }
 }
 
@@ -451,4 +445,32 @@ a.toc-link {
 .stPageFlipBoundary {
   user-select: none;
   -webkit-user-select: none;
+}
+
+/* =====================================================================
+   SỬA LỖI THANH NÚT ĐIỀU HƯỚNG BỊ THANH HOME / THANH ĐỊA CHỈ CHE MẤT
+   (đặt cuối file để ghi đè các khai báo height: calc(100vh - ...) ở trên)
+
+   Nguyên nhân: trên điện thoại, 100vh = chiều cao khi thanh địa chỉ đã
+   thu gọn, nên lớn hơn vùng nhìn thấy thật -> thanh nút bị đẩy xuống
+   dưới đáy màn hình. 100dvh = chiều cao vùng nhìn thấy thực tế.
+   ===================================================================== */
+html,
+body {
+  height: 100vh; /* dự phòng cho trình duyệt cũ */
+  height: 100dvh;
+}
+
+/* Sách chiếm phần còn lại; thanh nút luôn nằm gọn ở đáy vùng nhìn thấy */
+.book-container {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  max-height: none;
+}
+
+.controls {
+  flex-shrink: 0;
+  /* chừa thêm khoảng trống phía dưới cho thanh home / thanh cử chỉ */
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
 }
